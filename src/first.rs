@@ -8,18 +8,18 @@ enum Link {
     More(Box<Node>)
 }
 #[derive(Clone)]
-pub struct Node{
+struct Node{
     elem: i32,
     next: Link,
 }
 
 impl List {
-    pub fn new()->Self{
+    fn new()->Self{
         // build a list, header points to Link::Empty, 
         List { header: Link::Empty }
     }
 
-    pub fn push(&mut self, elem: i32){
+    fn push(&mut self, elem: i32){
         // new a Node struct at heap, node.next points to self.header,
         // put node value into Link::More()
         // change points of self.headr to Link Type entity 
@@ -30,7 +30,7 @@ impl List {
         self.header = Link::More(new_node);
     }
 
-    pub fn pop(&mut self) -> Option<i32>{
+    fn pop(&mut self) -> Option<i32>{
         //get header, change the mem, change self.header to the previous element
         match std::mem::replace(&mut self.header, Link::Empty){
             Link::Empty => None,
@@ -40,6 +40,7 @@ impl List {
             },
         }
     }
+    
 }
 
 #[cfg(test)]
